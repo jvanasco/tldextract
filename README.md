@@ -103,8 +103,10 @@ tldextract http://forums.bbc.co.uk
 ### Note About Caching
 
 Beware when first running the module, it updates its TLD list with a live HTTP
-request. This updated TLD set is cached indefinitely in
-`/path/to/tldextract/.tld_set`.
+request. This updated TLD set is cached indefinitely alongside the python module's
+installation as `/path/to/tldextract/.tld_set`.  (This is probably stored in something
+like  `/lib/pythonX.Y/site-packages/tldextract/.tld_set`; it is not stored with the
+`tldextract` binary in `/bin`.)
 
 (Arguably runtime bootstrapping like that shouldn't be the default behavior,
 like for production systems. But I want you to have the latest TLDs, especially
