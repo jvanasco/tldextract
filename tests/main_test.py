@@ -86,7 +86,7 @@ def test_qualified_local_host():
 
 def test_ip():
     assert_extract('', '', '216.22.0.192', '', 'http://216.22.0.192/')
-    assert_extract('', '216.22', 'project', 'coop', 'http://216.22.project.coop/')
+    assert_extract('216.22.project.coop', '216.22', 'project', 'coop', 'http://216.22.project.coop/')
 
 
 def test_looks_like_ip():
@@ -95,7 +95,7 @@ def test_looks_like_ip():
 
 def test_punycode():
     assert_extract(
-        'xn--h1alffa9f.xn', '', 'xn--h1alffa9f', 'xn--p1ai',
+        'xn--h1alffa9f.xn--p1ai', '', 'xn--h1alffa9f', 'xn--p1ai',
         'http://xn--h1alffa9f.xn--p1ai'
     )
     # Entries that might generate UnicodeError exception
@@ -123,7 +123,7 @@ def test_invalid_puny_with_puny():
 
 def test_puny_with_non_puny():
     assert_extract(
-        u'http://xn--zckzap6140b352by.blog.so-net.教育.hk',
+        u'xn--zckzap6140b352by.blog.so-net.教育.hk',
         'xn--zckzap6140b352by.blog', 'so-net', u'教育.hk',
         u'http://xn--zckzap6140b352by.blog.so-net.教育.hk'
     )
