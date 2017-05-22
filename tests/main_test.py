@@ -115,7 +115,7 @@ def test_punycode():
 
 def test_invalid_puny_with_puny():
     assert_extract(
-        '',
+        'xn--zckzap6140b352by.blog.so-net.xn--wcvs22d.hk',
         'xn--zckzap6140b352by.blog', 'so-net', 'xn--wcvs22d.hk',
         'http://xn--zckzap6140b352by.blog.so-net.xn--wcvs22d.hk'
     )
