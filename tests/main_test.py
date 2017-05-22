@@ -63,11 +63,11 @@ def test_odd_but_possible():
 
 def test_local_host():
     assert_extract(
-        ''. '', 'internalunlikelyhostname', '',
+        '', '', 'internalunlikelyhostname', '',
         'http://internalunlikelyhostname/'
     )
     assert_extract(
-        ''. 'internalunlikelyhostname', 'bizarre', '',
+        '', 'internalunlikelyhostname', 'bizarre', '',
         'http://internalunlikelyhostname.bizarre'
     )
 
