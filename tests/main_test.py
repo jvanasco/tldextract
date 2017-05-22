@@ -79,7 +79,7 @@ def test_qualified_local_host():
         'http://internalunlikelyhostname.info/'
     )
     assert_extract(
-        'internalunlikelyhostname.information', 'internalunlikelyhostname',
+        '', 'internalunlikelyhostname',
         'information', '', 'http://internalunlikelyhostname.information/'
     )
 
