@@ -33,6 +33,7 @@ def assert_extract(
 
     for fun in funs:
         ext = fun(url)
+        assert expected_fqdn == ext.fqdn
         assert expected_subdomain == ext.subdomain
         assert expected_domain == ext.domain
         assert expected_tld == ext.suffix
@@ -74,7 +75,7 @@ def test_local_host():
 
 def test_qualified_local_host():
     assert_extract(
-        'internalunlikelyhostname.info',  '', 'internalunlikelyhostname', 'info',
+        'internalunlikelyhostname.info', '', 'internalunlikelyhostname', 'info',
         'http://internalunlikelyhostname.info/'
     )
     assert_extract(
@@ -148,7 +149,7 @@ def test_scheme():
 
 
 def test_port():
-    assert_extract('www.github.com', 'www.github.com', 'www', 'github', 'com', 'git+ssh://www.github.com:8443/')
+    assert_extract('www.github.com', 'www', 'github', 'com', 'git+ssh://www.github.com:8443/')
 
 
 def test_username():
