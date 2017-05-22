@@ -94,7 +94,7 @@ def test_looks_like_ip():
 
 def test_punycode():
     assert_extract(
-        'xn--h1alffa9f.xn, '', 'xn--h1alffa9f', 'xn--p1ai',
+        'xn--h1alffa9f.xn', '', 'xn--h1alffa9f', 'xn--p1ai',
         'http://xn--h1alffa9f.xn--p1ai'
     )
     # Entries that might generate UnicodeError exception
