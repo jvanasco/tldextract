@@ -121,6 +121,37 @@ def test_puny_with_non_puny():
                     'xn--zckzap6140b352by.blog', 'so-net', u'教育.hk'))
 
 
+def test_punycode_narrow_python():
+    """
+    see https://github.com/john-kurkowski/tldextract/issues/122
+
+    Python2 through 3.3 stores unicode data as either UCS-2 (roughly UTF-16)
+    or UCS-4 (UTF-32). The default storage format was UCS-2; supporting UCS-4
+    requires compiling Python with extended support using this configure option:
+
+        ./configure --enable-unicode=ucs4
+
+    The max unicode point is available by the variable `sys.maxunicode`
+
+    'narrow' Python27 builds will raise exceptions on unicode characters that are
+    outside the UCS-2 range. Python3.3+ handles Unicode differently (see PEP-393)
+
+    This test (& fix offered in PR#130) is a punycoded domain name with a
+    "wide" unicode character.  No change should be determined in 3.3+ builds;
+    narrow builds will simply not have the domain decoded.
+
+    This test is redundant on wide builds, and only exists for testing support
+    against narrow builds.  If one has a "narrow" Python build (the default for
+    python through 3.3), the punycode decoding would raise an Exception when
+    encountering a UTF-16 character in earlier versions of this package. The
+    current expected behavior is to catcht the decoding error and leave it as
+    punycode (which is the same behavior in this library for other unicode
+    exceptions).
+   """
+    assert_extract('xn--vi8hiv.ws',
+                   ('xn--vi8hiv.ws', '', 'xn--vi8hiv', 'ws'))
+
+
 def test_idna_2008():
     """Python supports IDNA 2003.
     The IDNA library adds 2008 support for characters like ß.
